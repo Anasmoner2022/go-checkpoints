@@ -1,50 +1,234 @@
-## Network Traffic Peak
+# Network Traffic Peak
 
-### Signature
+## Function Signature
+
 ```go
 func NetworkTrafficPeak(traffic []int, k int) float64
-
 ```
 
-### The Challenge
+---
 
-You are working on an internal monitoring system for a core network router. The router logs the total volume of network traffic (in megabytes) processed every second as an element in an integer slice called `traffic`.
+## Objective
 
-To identify spike patterns, you need to calculate the **maximum average data throughput** sustained over any continuous window of exactly `k` seconds.
+You are given:
 
-Write a function that calculates this maximum average value and returns it as a floating-point number (`float64`).
+* A slice of integers `traffic`
+* An integer `k`
 
-### Constraints
+Your task is to find the **maximum average value** among all contiguous subarrays of length exactly `k`.
 
-| Property | Requirement |
-| --- | --- |
-| **Time Complexity** | O(n) — You must traverse the array in a single pass. Recalculating the sum for every window from scratch (O(n*k)) will fail the performance test. |
-| **Space Complexity** | O(1) auxiliary space — Modifying the data structure or allocating arrays/slices is strictly forbidden. |
-| **Input Bounds** | `k` will always be greater than 0, and less than or equal to the total length of the `traffic` slice. |
+Return the answer as a `float64`.
 
-### Examples
+---
 
-#### Example 1
+## Example 1
 
-* **Input:** `traffic = [10, 20, 30, 40, 10, 20]`, `k = 3`
-* **Output:** `30.00000`
-* **Reason:**
-The contiguous windows of size 3 are:
-* `[10, 20, 30]` -> Average = 20.0
-* `[20, 30, 40]` -> Average = 30.0
-* `[30, 40, 10]` -> Average = 26.66667
-* `[40, 10, 20]` -> Average = 23.33333
-The maximum sustained average is `30.0`.
+### Input
 
+```go
+traffic = [10, 20, 30, 40, 10, 20]
+k = 3
+```
 
+### Output
 
-#### Example 2
+```go
+30.00000
+```
 
-* **Input:** `traffic = [5, 5, 5, 5]`, `k = 2`
-* **Output:** `5.00000`
-* **Reason:** All windows of size 2 have a total sum of 10 and an average of 5.0.
+### Explanation
 
-### Notes
+All windows of size `3`:
 
-* Because the output requires floating-point precision, make sure to explicitly cast your calculated integer sums to `float64` before dividing by `k` to prevent decimal truncation.
-* **Sliding Window Principle:** Do not sum up all `k` elements every time the window moves down the array. Instead, subtract the element leaving the window on the left, and add the new element entering the window on the right.
+```text
+[10, 20, 30] -> sum = 60  -> average = 20.0
+[20, 30, 40] -> sum = 90  -> average = 30.0
+[30, 40, 10] -> sum = 80  -> average = 26.66667
+[40, 10, 20] -> sum = 70  -> average = 23.33333
+```
+
+The maximum average is:
+
+```text
+30.0
+```
+
+---
+
+## Example 2
+
+### Input
+
+```go
+traffic = [5, 5, 5, 5]
+k = 2
+```
+
+### Output
+
+```go
+5.00000
+```
+
+### Explanation
+
+All windows have the same average:
+
+```text
+[5, 5] -> 5.0
+[5, 5] -> 5.0
+[5, 5] -> 5.0
+```
+
+So the answer is `5.0`.
+
+---
+
+## Requirements
+
+| Requirement      | Value  |
+| ---------------- | ------ |
+| Time Complexity  | `O(n)` |
+| Space Complexity | `O(1)` |
+
+---
+
+## Hint
+
+This is a **Fixed-Size Sliding Window** problem.
+
+The window size never changes.
+
+It is always exactly:
+
+```text
+k
+```
+
+---
+
+## Core Idea
+
+First, calculate the sum of the first `k` elements.
+
+Example:
+
+```text
+traffic = [10, 20, 30, 40, 10, 20]
+k = 3
+
+Window:
+[10, 20, 30]
+```
+
+Current sum:
+
+```text
+60
+```
+
+This becomes your initial window.
+
+---
+
+## Moving the Window
+
+When the window moves one position to the right:
+
+```text
+[10, 20, 30] 40 10 20
+ ^
+```
+
+becomes
+
+```text
+10 [20, 30, 40] 10 20
+              ^
+```
+
+Instead of recalculating the entire sum:
+
+```text
+20 + 30 + 40
+```
+
+update it using:
+
+```text
+newSum = oldSum
+         - elementLeavingWindow
+         + elementEnteringWindow
+```
+
+Example:
+
+```text
+60 - 10 + 40 = 90
+```
+
+This allows each window update to happen in constant time.
+
+---
+
+## Visual Example
+
+```text
+traffic = [10, 20, 30, 40, 10, 20]
+k = 3
+
+[10,20,30] -> sum = 60
+[20,30,40] -> sum = 90
+[30,40,10] -> sum = 80
+[40,10,20] -> sum = 70
+```
+
+Track the maximum sum while sliding through the array.
+
+At the end:
+
+```text
+maximum average = maximum sum / k
+```
+
+---
+
+## Important Note
+
+Convert to `float64` before dividing:
+
+```go
+float64(maxSum) / float64(k)
+```
+
+Otherwise integer division may remove the decimal portion.
+
+---
+
+## Common Mistakes
+
+* Recalculating every window sum from scratch (`O(n × k)`)
+* Forgetting to update the maximum sum
+* Using a variable-size window instead of a fixed-size window
+* Returning the maximum sum instead of the maximum average
+* Performing integer division
+
+---
+
+## Goal
+
+Learn the pattern:
+
+```text
+Fixed-Size Sliding Window
+```
+
+The key observation is:
+
+```text
+When a window moves:
+Remove one value
+Add one value
+```
+
+This simple idea reduces the solution from `O(n × k)` to `O(n)` and appears frequently in array and interview problems involving averages, sums, and fixed-length ranges.
