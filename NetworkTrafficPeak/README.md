@@ -193,18 +193,6 @@ maximum average = maximum sum / k
 
 ---
 
-## Important Note
-
-Convert to `float64` before dividing:
-
-```go
-float64(maxSum) / float64(k)
-```
-
-Otherwise integer division may remove the decimal portion.
-
----
-
 ## Common Mistakes
 
 * Recalculating every window sum from scratch (`O(n × k)`)
