@@ -18,7 +18,7 @@ Write a function that processes all queries and returns a slice of integers repr
 
 | Property | Requirement |
 | --- | --- |
-| **Time Complexity** | $O(q \log n)$ — Where $q$ is the number of queries and $n$ is the number of timestamps. A linear scan to count elements for each query ($O(q \times n)$) will fail the automated performance metrics. |
+| **Time Complexity** | $O(q \log n)$ — Where $q$ is the number of queries and $n$ is the number of timestamps. |
 | **Space Complexity** | $O(q)$ — To store and return the slice of calculated counts. |
 | **Forbidden** | Do not use the `sort` package. |
 
@@ -34,15 +34,3 @@ Write a function that processes all queries and returns a slice of integers repr
 * `[20, 20]`: Only timestamp `20` matches. (Count: 1)
 * `[60, 70]`: No timestamps fall in this range. (Count: 0)
 * `[5, 45]`: Timestamps `10, 20, 30, 40` match. (Count: 4)
-
-
-
-### Notes
-
-* Do not iterate through the array to count items! Instead, use binary search twice per query:
-1. Find the index of the first element $\ge startTime$ (Lower Bound).
-2. Find the index of the first element $> endTime$ (Upper Bound).
-
-
-* The total count of elements in the range is simply `UpperBoundIndex - LowerBoundIndex`.
-* Be careful with boundary cases where the `endTime` is larger than the maximum timestamp in the array.
