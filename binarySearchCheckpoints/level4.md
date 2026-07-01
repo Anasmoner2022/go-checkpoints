@@ -49,4 +49,22 @@ Write a function that calculates and returns the **exact number of days** that e
 3. **Unless** it is exactly divisible by 400, in which case it **is** a leap year.
 
 
+ Month  | Name      | Days in Common Year 
+--------|-----------|---------------------
+ 1      | January   | 31                  
+ 2      | February  | 28                  
+ 3      | March     | 31                  
+ 4      | April     | 30                  
+ 5      | May       | 31                  
+ 6      | June      | 30                  
+ 7      | July      | 31                  
+ 8      | August    | 31                  
+ 9      | September | 30                  
+ 10     | October   | 31                  
+ 11     | November  | 30                  
+ 12     | December  | 31                  
+           
+
+
+
 * `crashTime` is guaranteed to be chronologically greater than or equal to `bootTime`.
