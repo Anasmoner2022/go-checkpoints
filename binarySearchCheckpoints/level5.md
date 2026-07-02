@@ -18,8 +18,8 @@ To prevent any single data center from melting down under pressure, your goal is
 
 | Property | Requirement |
 | --- | --- |
-| **Time Complexity** | $O(n \log(\text{sum} - \text{max}))$ — Where $n$ is the length of the loads slice, $\text{sum}$ is the total load, and $\text{max}$ is the single largest load. Backtracking or recursion ($O(n^k)$) will instantly fail the performance audit. |
-| **Space Complexity** | $O(1)$ auxiliary space. |
+| **Time Complexity** | O(n log(text{sum} - text{max})) — Where n is the length of the loads slice, {sum} is the total load, and {max} is the single largest load. Backtracking or recursion (O(n^k)) will instantly fail the performance audit. |
+| **Space Complexity** | O(1) auxiliary space. |
 | **Forbidden** | You must not use the `math` or `sort` packages. |
 
 ### Examples
