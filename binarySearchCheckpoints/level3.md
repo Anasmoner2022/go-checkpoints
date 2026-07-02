@@ -18,8 +18,8 @@ Write a function that processes all queries and returns a slice of integers repr
 
 | Property | Requirement |
 | --- | --- |
-| **Time Complexity** | $O(q \log n)$ — Where $q$ is the number of queries and $n$ is the number of timestamps. |
-| **Space Complexity** | $O(q)$ — To store and return the slice of calculated counts. |
+| **Time Complexity** | O(q log n) — Where q is the number of queries and n is the number of timestamps. |
+| **Space Complexity** | O(q) — To store and return the slice of calculated counts. |
 | **Forbidden** | Do not use the `sort` package. |
 
 ### Examples
