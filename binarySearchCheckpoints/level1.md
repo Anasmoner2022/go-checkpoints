@@ -20,8 +20,8 @@ Write a function that processes all queries and returns a slice of integers cont
 
 | Property | Requirement |
 | --- | --- |
-| **Time Complexity** | $O(q \log n)$ — Where $q$ is the number of queries and $n$ is the number of addresses. Scanning the array linearly for every query $O(q * n)$ will fail the automated performance benchmark. |
-| **Space Complexity** | $O(q)$ — To store the output slice of results. |
+| **Time Complexity** | O(q log n) — Where q is the number of queries and n is the number of addresses. Scanning the array linearly for every query O(q * n) will fail the automated performance benchmark. |
+| **Space Complexity** | O(q) — To store the output slice of results. |
 | **Forbidden** | Do not use the `sort.Search` package to bypass writing the algorithm manually. |
 
 ### Examples
@@ -31,10 +31,10 @@ Write a function that processes all queries and returns a slice of integers cont
 * **Input:** `addresses = [2, 4, 8, 16, 32]`, `queries = [3, 16, 40, 1]`
 * **Output:** `[1, 3, -1, 0]`
 * **Reason:**
-* Query `3`: The smallest block $\ge 3$ is `4` (at index 1).
+* Query `3`: The smallest block 3 is `4` (at index 1).
 * Query `16`: Exact match for `16` (at index 3).
-* Query `40`: No block is $\ge 40$, so return `-1`.
-* Query `1`: The smallest block $\ge 1$ is `2` (at index 0).
+* Query `40`: No block is 40, so return `-1`.
+* Query `1`: The smallest block 1 is `2` (at index 0).
 
 
 
